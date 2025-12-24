@@ -1,5 +1,11 @@
 import mido
 import time
+import argparse
+
+parser = argparse.ArgumentParser(description='Test MIDI Ports \n Simple python that implements the midio library to detet MIDI ports and test channel strips.')
+parser.add_argument('-p', '--port', type=str, help='Port Name', required=False)
+args = parser.parse_args()
+
 print("\n\n")
 print("\t\t##########################")
 print("\t\t## __  __  _   _  ____  ##")
@@ -11,22 +17,28 @@ print("\t\t##########################")
 print("\t\t##### TEST MIDI PORTS ####")
 print("\t\t##########################")
 print("\n\n")
-ports = mido.get_output_names()
-for i,p in enumerate(ports):
-    print(f"\t{i} | Port: '{p}'")
 
-if not ports:
-    print("\n\n\t (!!!) ERROR: Python did not detect MIDI ports\n\n")
-    exit(1)
+port_name = None
+if args.port:
+    port_name = args.port
 
-nports = len(ports) -1
-selection = input(f"\t\nPlease select a port (0-{nports}): ")
-
-if selection.isdigit() and 0 <= int(selection) <= nports:
-    port_name = ports[int(selection)]
 else:
-    print(f"\t\n (!!!) Invalid input. Please enter a single digit between 0 and {nports}.\n\n")
-    exit(1)
+    ports = mido.get_output_names()
+    for i,p in enumerate(ports):
+        print(f"\t{i} | Port: '{p}'")
+
+    if not ports:
+        print("\n\n\t (!!!) ERROR: Python did not detect MIDI ports\n\n")
+        exit(1)
+
+    nports = len(ports) -1
+    selection = input(f"\t\nPlease select a port (0-{nports}): ")
+
+    if selection.isdigit() and 0 <= int(selection) <= nports:
+        port_name = ports[int(selection)]
+    else:
+        print(f"\t\n (!!!) Invalid input. Please enter a single digit between 0 and {nports}.\n\n")
+        exit(1)
 
 print(f"\n\t ---> TESTING PORT: {port_name} <---\n")
 
@@ -40,7 +52,7 @@ try:
             time.sleep(0.5)
             port.send(mido.Message('note_off', note=60, channel=channel-1))
     print("\n\n\t did you hear the note?")
-
+    exit(0)
 except Exception as e:
     print(f"\t\n (!!!) Error opening port {port_name}: {e}")
-
+    exit(1)
