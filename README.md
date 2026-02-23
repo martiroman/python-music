@@ -16,15 +16,15 @@ You will need Python 3.x and the mido library with a MIDI backend (like python-r
 #### 📖 Usage
 Run the script with default settings (Port: "NTS", Channel: 1):
 
-  ´´´Bash
+  ```bash
   python nts_mido_control.py
-  ´´´
+  ```
 ##### Custom Arguments
 Specify your MIDI device name or channel via terminal flags:
   
-  ´´´Bash
+  ```bash
   python nts_mido_control.py --port "YourDeviceName" --channel 2
-  ´´´
+  ```
 
 #### 🎹 Technical Configuration
 You can easily tweak these variables inside the script:
