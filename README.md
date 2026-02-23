@@ -13,18 +13,18 @@ The script creates a fast-paced, evolving arpeggio by combining a fixed scale wi
 #### 🛠️ Requirements
 You will need Python 3.x and the mido library with a MIDI backend (like python-rtmidi).
 
-📖 Usage
+#### 📖 Usage
 Run the script with default settings (Port: "NTS", Channel: 1):
 
-´´´Bash
-python nts_mido_control.py
-
+  ´´´Bash
+  python nts_mido_control.py
+  ´´´
 ##### Custom Arguments
 Specify your MIDI device name or channel via terminal flags:
-´´´
-´´´Bash
-python nts_mido_control.py --port "YourDeviceName" --channel 2
-´´´
+  
+  ´´´Bash
+  python nts_mido_control.py --port "YourDeviceName" --channel 2
+  ´´´
 
 #### 🎹 Technical Configuration
 You can easily tweak these variables inside the script:
